@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 该属性指定的是本机的MySQL驱动包的绝对路径地址 -->
+    <!--
+        <classPathEntry location="D:/mvenrepository/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar"/>
+     -->
+
+    <!-- 引入db.properties配置文件内容 -->
+    <properties resource="db.properties"/>
+
+    <!-- targetRuntime="MyBatis3" 生成带条件的增删改查 -->
+    <!-- targetRuntime="MyBatis3Simple" 生成基本的增删改查 -->
+    <!-- targetRuntime="MyBatis3DynamicSql" 生成带更高级的语句 -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!-- 配置通用Mapper插件 -->
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.mapper}"/>
+        </plugin>
+
+        <!-- 是否去除自动生成的注释（一堆英文）， true表示去除， false表示不去除 -->
+        <commentGenerator>
+            <!--            <property name="suppressAllComments" value="true"/>-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}">
+            <!-- 这个配置很关键， 不加的话会使用mysql8.X版本的驱动会将所有库的表都生成 -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 该标签默认false， 把JDBC、DECIMAL、NUMERIC类型解析为Integer，为true时将三种类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 该标签用于指定生成的实体类的所在包名以及代码生成位置 -->
+        <javaModelGenerator targetPackage="cn.cnm.pojo"
+                            targetProject=".\src\main\java">
+            <!-- 是否让Schema（这里指的是数据库名）作为包的后缀：cn.cnm.pojo.ssm ssm就是数据库名 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 为true时表示从数据库返回的值清理前后的空格， false表示不清理 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 该标签用于指定生成的*.xml文件的所在包名以及代码生成位置 -->
+        <sqlMapGenerator targetPackage="cn.cnm.mapper"
+                         targetProject=".\src\main\java">
+            <!-- 为true时让Schema作为生成包的后缀 cn.cnm.mapper.ssm ssm就是数据库名 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 该标签用于指定生成的mapper文件的所在包名以及代码生成位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="cn.cnm.mapper" targetProject=".\src\main\java">
+            <!-- 为true时让Schema作为生成包的后缀 cn.cnm.mapper.ssm ssm就是数据库名 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <!-- 该标签用于指定需要生成的数据表名称以及生成后的实体类名称, 其中table标签可以使用多次，一次对应一张表 -->
+        <!-- tableName：对应数据库中的表名 -->
+        <!-- domainObjectName：指定生成的实体类名 -->
+        <!-- enableCountByExample：表示是否应生成按示例计数的语句，该语句将返回表中与示例匹配的行数， 默认值为true -->
+        <!-- enableUpdateByExample：指示是否应生成示例更新语句，该语句将更新与示例匹配的表中的行，如果为true，还将生成一个示例"selective"语句的更新，
+            "selective"语句将仅更新record参数中的对应值非空的列默认值为true -->
+        <!-- enableDeleteByExample：指示是否应生成示例删除语句，此语句允许在运行时生成许多不同的动态删除，默认值为true -->
+        <!-- enableSelectByExample：表示是否应生成“按示例选择”语句，此语句允许在运行时生成许多不同的动态查询，默认值为true -->
+        <!-- selectByExampleQueryId：该值将以以下形式添加到“按示例选择”语句的选择列表中：“'<value>'as QUERYID”，这对于在运行时识别DBA跟踪工具中的查询很有用。如果使用该值，则应为MBG生成的每个不同查询指定唯一的ID -->
+        <!--<table tableName="people" domainObjectName="People"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false"/>-->
+        <!-- schema：表示database的名称， 比如这里写 schema="ssm"， 那么上面jdbc的链接地址里的ssm要去掉， 所以一般留空就行 -->
+        <!--<table schema="" tableName="airport"></table>-->
+
+        <!-- %表示匹配库中的所有表都参与逆向工程， 此时使用默认规则（生成的实体类名和表名一致） -->
+        <!-- （需要表名和实体类名不一致时还是用上面的一个个指定再生成） -->
+        <table schema="" tableName="%">
+            <!-- 主键生成策略 -->
+            <generatedKey column="id" sqlStatement="Mysql" identity="false"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
