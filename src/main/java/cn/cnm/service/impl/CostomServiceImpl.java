@@ -1,6 +1,7 @@
 package cn.cnm.service.impl;
 
 import cn.cnm.mapper.CostomFlowerMapper;
+import cn.cnm.mapper.FlowerMapper;
 import cn.cnm.pojo.Flower;
 import cn.cnm.service.CostomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,16 @@ public class CostomServiceImpl implements CostomService {
     @Autowired
     private CostomFlowerMapper costomFlowerMapper;
 
+    @Autowired
+    private FlowerMapper flowerMapper;
+
     @Override
     public List<Flower> getAll() {
         return costomFlowerMapper.selectAll();
+    }
+
+    @Override
+    public List<Flower> mySelect() {
+        return flowerMapper.mySelect();
     }
 }

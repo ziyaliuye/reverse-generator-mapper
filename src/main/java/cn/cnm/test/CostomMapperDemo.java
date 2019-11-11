@@ -4,6 +4,7 @@ import cn.cnm.pojo.Flower;
 import cn.cnm.service.CostomService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.List;
 
 /**
@@ -21,5 +22,12 @@ public class CostomMapperDemo {
 
         List<Flower> list = costomService.getAll();
         list.forEach(System.out::println);
+
+        /* 自定义的SQL */
+        List<Flower> myList1 = costomService.mySelect();
+        myList1.forEach(System.out::println);
+        System.out.println("二级缓存不生效， 因为都是在同一个sqlSession中");
+        List<Flower> myList2 = costomService.mySelect();
+        myList2.forEach(System.out::println);
     }
 }

@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface CostomService {
     List<Flower> getAll();
+    List<Flower> mySelect();
 }
