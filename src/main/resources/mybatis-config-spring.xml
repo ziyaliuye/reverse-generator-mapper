@@ -16,6 +16,14 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
 
+    <typeHandlers>
+        <!-- 配置自定义类型转换器, 指定实体类对应的处理器 -->
+        <typeHandler handler="cn.cnm.handler.AdressTypeHandler" javaType="cn.cnm.pojo.Adress"></typeHandler>
+        <!-- 配置内置的枚举类型处理器， 可以指定对应的泛型是哪个类 -->
+        <!--<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"-->
+        <!--javaType="cn.cnm.enum.XxxEnum"></typeHandler>-->
+    </typeHandlers>
+
     <!-- 给实体类取别名， 不建议使用这个， 日志会乱码， 在Spring配置文件中配置 -->
     <!-- typeAliases标签就是别名处理器， 可以为Java类取别名， 并且注意别名不区分大小写 -->
     <!--<typeAliases>-->
