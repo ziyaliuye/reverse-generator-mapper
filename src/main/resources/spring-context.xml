@@ -48,7 +48,7 @@
         <!--mapperLocations: 指定mapper文件的位置-->
         <property name="mapperLocations" value="classpath:cn/cnm/mapper/*.xml"></property>
         <!-- 给实体类取别名， 建议使用这个， 日志不会乱码 -->
-        <property name="typeAliasesPackage" value="cn.cnm.pojo" />
+        <property name="typeAliasesPackage" value="cn.cnm.pojo"/>
     </bean>
 
     <!--配置一个可以进行批量执行的sqlSession -->
@@ -80,7 +80,16 @@
 
     <!-- 通用Mapper的各项属性通过 properties 属性进行配置，如果默认配置就是一行 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="cn.cnm.mapper"/>
+        <property name="basePackage" value="cn.cnm.mapper"/>
+        <!-- 给通用Mapper增加属性配置 -->
+        <property name="properties">
+            <!-- 配置自定义的Mapper -->
+            <value>
+                mappers=cn.cnm.custom.MyMapper
+            </value>
+        </property>
     </bean>
+
+    <bean name="costomService" class="cn.cnm.service.impl.CostomServiceImpl"></bean>
 
 </beans>

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import tk.mybatis.mapper.mapperhelper.MapperHelper;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,7 @@ public class JavaMapperDemo {
             Configuration configuration = session.getConfiguration();
             MapperHelper mapperHelper = new MapperHelper();
             // 对MyBatis原生对象做处理， 其他地方都正常使用
-             mapperHelper.processConfiguration(configuration);
+            mapperHelper.processConfiguration(configuration);
 
             // 获取接口的实现类, 由MyBatis自动产生代理对象
             FlowerMapper flowerMapper = session.getMapper(FlowerMapper.class);
