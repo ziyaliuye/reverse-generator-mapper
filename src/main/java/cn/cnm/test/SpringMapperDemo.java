@@ -1,11 +1,9 @@
 package cn.cnm.test;
 
-import cn.cnm.mapper.AirportMapper;
 import cn.cnm.pojo.Flower;
 import cn.cnm.service.CostomService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.util.List;
 
 /**
