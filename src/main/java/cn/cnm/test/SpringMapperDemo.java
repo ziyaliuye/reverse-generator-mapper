@@ -1,6 +1,5 @@
 package cn.cnm.test;
 
-
 import cn.cnm.mapper.AirportMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
